@@ -1,6 +1,6 @@
 # item_simulator
-##### 개인 과제) 아이템 시뮬레이터
-[AWS 링크]()
+##### (개인 과제) 아이템 시뮬레이터
+[AWS 링크]() <br/>
 [Tistory](https://dydgustmdfl1231.tistory.com/)
 
 ### 과제 목표

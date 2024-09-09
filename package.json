@@ -1,0 +1,23 @@
+{
+  "name": "item_simulator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/YongHyeon1231/item_simulator.git",
+  "author": "YongHyeon1231 <120100530+YongHyeon1231@users.noreply.github.com>",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@prisma/client": "^5.19.1",
+    "chalk": "^5.3.0",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2",
+    "figlet": "^1.7.0",
+    "jsonwebtoken": "^9.0.2",
+    "prisma": "^5.19.1",
+    "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4",
+    "prettier": "^3.3.3"
+  }
+}
