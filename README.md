@@ -13,6 +13,7 @@
 
 ### API 명세서
 API 목록
+|------|---|---|---|---|---|---|---|---|
 |users|characters|items|equipments|inventories|shops|userInfos|itemInfos|getMoney|
 
 ### ER Diagram (aquerytool)
