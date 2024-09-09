@@ -12,7 +12,7 @@
 6. 즉, 프로젝트에 요구 사항을 토대로 API 리스트를 작성하고, 백엔드 서버를 설계할 수 있다.
 
 ### API 명세서
-API 목록
+API 목록 <br/>
 ![image](https://github.com/user-attachments/assets/6e2a9d11-7f04-4db7-b71d-5544e652d6de)
 
 API 상세 정보 (https://www.notion.so/API-90fb99e500e344858dbd0648b0c217bb)
