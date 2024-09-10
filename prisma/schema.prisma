@@ -12,3 +12,77 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+// 데이터베이스 모델링
+
+model Users {
+  userId Int @id @default(autoincrement()) @map("userId")
+  username String @unique @map("username")
+  password Striung @map("password")
+
+  characters Characters[] // 1:N
+
+  @@map("Users")
+}
+
+model Characters {
+  characterId Int @id @default(autoincrement()) @map("characterId");
+  characterName String @unique @map("characterName")
+  health  Int @default(500) @map("health")
+  power Int @default(100) @map("power")
+  money Int @default(10000) @map("money")
+
+  userId Int @map("userId")
+
+  users Users @relation(fields: [userId], references: [userId], onDelete: Cascade)
+
+  inventories Inventories[] // 1:N
+  equipments Equipments[] // 1:N
+
+  @@map("Characters")
+}
+
+model Inventories {
+  inventoryId String @id @default(uuid()) @map("inventoryId")
+
+  characterId Int @map("characterId")
+
+  itemCode Int @map("itemCode")
+  count Int @default(0) @map("count")
+
+  characters Characters @relation(fields: [characterId], references: [characterId], onDelete: Cascade)
+  items ItemCode @relation(fields:[itemCode], references: [itemCode], onUpdate: Cascade)
+
+  @@map("Inventories")
+}
+
+model Items {
+  itemCode Int  @id @map("itemCode")
+  itemName  String  @unique @map("itemName")
+  itemStat  Json    @map("itemStat")
+  itemPrice   Int   @map("itemPrice")
+
+  inventories Inventories[] // 1:N
+
+  @@map("Items")
+}
+
+model Equipments {
+  equipmentId String  @id @default(uuId()) @map("equipmentId")
+
+  characterId Int @map("characterId")
+
+  itemCode Int @map("itemCode")
+
+  characters Characters @relation(fields: [characterId], references: [characterId], onDelete: Cascade)
+
+  @@map("Equipments")
+}
+
+// 현재 모델링 상태
+// Users : Characters = 1: N
+// Characters : Inventories = 1: N <- 1:1인줄 알았음 설계를 다시 생각해보는중
+// Characters : Equipments = 1: N
+// Items : Iventories = 1: N
+// Equipments의 itemCode는 단순 장착한 아이템이 어떤것인지 알기 위해서 Stat을 추가해줘야 하기 때문에 넣었습니다.
+// Inventories의 itemCode는 내 item이 몇개 있는지 확인 Count는 그 갯수를 빼거나 하기 위해서 필요
