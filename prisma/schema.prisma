@@ -18,7 +18,7 @@ datasource db {
 model Users {
   userId Int @id @default(autoincrement()) @map("userId")
   username String @unique @map("username")
-  password Striung @map("password")
+  password String @map("password")
 
   characters Characters[] // 1:N
 
@@ -26,7 +26,7 @@ model Users {
 }
 
 model Characters {
-  characterId Int @id @default(autoincrement()) @map("characterId");
+  characterId Int @id @default(autoincrement()) @map("characterId")
   characterName String @unique @map("characterName")
   health  Int @default(500) @map("health")
   power Int @default(100) @map("power")
@@ -51,7 +51,7 @@ model Inventories {
   count Int @default(0) @map("count")
 
   characters Characters @relation(fields: [characterId], references: [characterId], onDelete: Cascade)
-  items ItemCode @relation(fields:[itemCode], references: [itemCode], onUpdate: Cascade)
+  items Items @relation(fields:[itemCode], references: [itemCode], onUpdate: Cascade)
 
   @@map("Inventories")
 }
@@ -68,7 +68,7 @@ model Items {
 }
 
 model Equipments {
-  equipmentId String  @id @default(uuId()) @map("equipmentId")
+  equipmentId String  @id @default(uuid()) @map("equipmentId")
 
   characterId Int @map("characterId")
 
