@@ -40,8 +40,6 @@ router.post(
         where: { characterId: characterId, itemCode: +itemCode },
       });
 
-      console.log('slot => ', slot);
-
       if (!slot) {
         const inventoryItem = await prisma.inventories.create({
           data: {
@@ -52,7 +50,6 @@ router.post(
         });
         msg = { message: '인벤토리 새로운 슬롯이 생성되었습니다.', data: inventoryItem };
       } else {
-        console.log('여기가 문제잖아?');
         const inventoryItem = await prisma.inventories.update({
           where: { inventoryId: slot.inventoryId, characterId: characterId, itemCode: +itemCode },
           data: {
@@ -64,7 +61,6 @@ router.post(
         });
         msg = { message: '기존에 있던 인벤토리 슬롯이 업데이트 되었습니다.', data: inventoryItem };
       }
-      console.log('여기가 문제잖아?!#@#');
       return res.status(200).json(msg);
     } catch (error) {
       next(error);

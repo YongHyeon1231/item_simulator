@@ -6,7 +6,7 @@ import itemValidatorJoiMiddleware from '../middlewares/validators/itemsValidator
 
 const router = express.Router();
 
-// 특정 캐릭터 장비 상태
+// 특정 캐릭터 장비 상태 조회
 router.get(
   '/equipments/:characterId',
   characterValidatorJoi.characterIdValidation,
