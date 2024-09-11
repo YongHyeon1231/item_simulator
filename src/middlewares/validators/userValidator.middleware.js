@@ -20,9 +20,23 @@ const userValidatorJoi = {
         const validation = await signUpSchema.validateAsync(req.body);
 
         if (validation.error) {
-            console.log(req.origianl)
+            console.log(req.origianlUrl, "화원가입 인증 실패");
+            let msg = "모두 소문자 그리고 숫자";
+            return res.status(400).json({message: msg});
         }
-        
+
+        next();
+    },
+    signInValidation: async function (req, res, next) {
+        const validation = await signInSchema.validateAsync(req.body);
+
+        if (validation.error) {
+            console.log(req.origianlUrl, "로그인 인증 실패");
+            let msg = "모두 소문자 그리고 숫자";
+            return res.status(400).json({message: msg});
+        }
+
+        next();
     }
 
 }

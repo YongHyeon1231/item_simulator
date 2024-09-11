@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { prisma } from "../../lib/utils/prisma/index.js";
 
 export default async function (req, res, next) {
     try {

@@ -14,7 +14,7 @@ const PORT = 3018;
 app.use(express.json());
 app.use(cookieParser());
 
-app.unsubscribe("/api", [usersRouter]);
+app.use("/api", [usersRouter]);
 
 app.use(ErrorHandlingMiddleware);
 

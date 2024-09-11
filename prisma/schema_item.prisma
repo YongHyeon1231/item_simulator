@@ -12,3 +12,12 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL_ITEM")
 }
+
+model Items {
+  itemCode Int @id @map("item_code")
+  itemCode String @unique @map("name")
+  itemHealth Int @default(0) @map("item_health")
+  itemPrice Int @map("item_price")
+
+  @@map("Items")
+}
