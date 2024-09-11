@@ -93,6 +93,9 @@ router.get('/users/get/:username', authMiddleWare, async (req, res, next) => {
         },
       },
     },
+    orderBy: {
+        userId: 'desc',
+    },
   });
 
   return res.status(200).json({ data: user });

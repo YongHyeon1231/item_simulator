@@ -24,6 +24,8 @@ export default async function (req, res, next) {
 
         req.user = user;
 
+        console.log("user => ", user)
+
         next();
     } catch(error) {
         res.clearCookie("authorization");
