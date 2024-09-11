@@ -60,12 +60,24 @@ router.get(
       if (!userId || !character) {
         return res.status(401).json({ errormessage: '유저 정보가 조회되지 않습니다.' });
       }
+      
+      const characterInventory = await prisma.inventories.findMany({
+        where: { characterId: characterId },
+        select: {
+          characterId: true,
+          itemCode: true,
+          count: true,
+        },
+      })
 
       return res.status(200).json({
         message: '캐릭터 정보가 조회되었습니다.',
         data: {
           ...character,
         },
+        inventory: {
+          ...characterInventory
+        }
       });
     } catch (error) {
       next(error);
