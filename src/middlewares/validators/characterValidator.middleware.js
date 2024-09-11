@@ -11,7 +11,7 @@ const characterNameSchema = Joi.object({
 
 const characterValidatorJoi = {
     characterNameValidation: async function(req, res, next) {
-        const validation = characterNameSchema.validate(req.body);
+        const validation = await characterNameSchema.validateAsync(req.body);
 
         if (validation.error) {
             console.log("characterNameSchema: ", validation.error.message, "2~20 문자 공백제거");
@@ -22,7 +22,7 @@ const characterValidatorJoi = {
         next();
     },
     characterIdValidation: async function (req, res, next) {
-        const validation =  characterIdSchema.validate(req.params);
+        const validation = await characterIdSchema.validateAsync(req.params);
 
         if (validation.error) {
             console.log("characterIdSchema: ", validation.error.message, "2~10 문자 공백제거");
