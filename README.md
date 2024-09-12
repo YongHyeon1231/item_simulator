@@ -1,6 +1,6 @@
 # item_simulator
 ##### (개인 과제) 아이템 시뮬레이터
-[AWS 링크]() <br/>
+[AWS 링크](https://yonghyeon.store:3000/) <br/>
 [Tistory](![image](https://github.com/user-attachments/assets/3388340f-9bf6-419f-ab53-5f77358677bd)
 )
 
