@@ -3,6 +3,9 @@
 [AWS 링크](https://yonghyeon.store:3000/) <br/>
 [Tistory](https://dydgustmdfl1231.tistory.com/49)
 
+![image](https://github.com/user-attachments/assets/6653fb3c-31e1-48be-a554-50fa8ceaf8d8)
+
+
 ### 과제 목표
 1. Express.js의 기본적인 사용법 및 CRUD 기반의 REST API 설계 방법 숙지
 2. NoSQL의 한 종류인 MongoDB를 mongoose를 통해 사용하는 법에 대해서 학습
