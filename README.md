@@ -3,7 +3,7 @@
 [AWS 링크](https://yonghyeon.store:3000/) <br/>
 [Tistory](https://dydgustmdfl1231.tistory.com/49)
 
-![image](https://github.com/user-attachments/assets/6653fb3c-31e1-48be-a554-50fa8ceaf8d8)
+![image](https://github.com/user-attachments/assets/65222b11-7a02-4650-916e-7e13287648f0)
 
 
 ### 과제 목표
