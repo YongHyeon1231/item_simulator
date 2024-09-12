@@ -8,6 +8,7 @@ import itemsRouter from './routes/items.route.js';
 import inventoriesRouter from './routes/inventories.route.js';
 import equipmentsRouter from './routes/equipments.route.js';
 import shopsRouter from './routes/shops.route.js';
+import getMoneyRouter from './routes/getMoney.route.js';
 import ErrorHandlingMiddleware from './middlewares/error-handling.middleware.js';
 
 // .env 파일을 읽어서 process.env에 추가합니다.
@@ -25,7 +26,8 @@ app.use('/api',
     itemsRouter, 
     inventoriesRouter, 
     equipmentsRouter, 
-    shopsRouter
+    shopsRouter,
+    getMoneyRouter
   ]);
 
 app.use(ErrorHandlingMiddleware);

@@ -20,7 +20,7 @@ router.get(
           itemCode: true,
         },
       });
-      let msg = {equipmentItems: [...equipmentItems]}
+      let msg = { equipmentItems: [...equipmentItems] };
       //return res.status(200).json([...equipmentItems]);
       return res.status(200).json(msg);
     } catch (error) {
@@ -66,78 +66,80 @@ router.put(
           .status(401)
           .json({ message: `해당 캐릭터의 인벤토리에 ${item.itemName}는 없습니다.` });
 
-      if (equip) {
-        //장착하려고 할때 equipments 생성
-        await prisma.equipments.create({
-          data: {
+      await prisma.$transaction(async (tx) => {
+        if (equip) {
+          //장착하려고 할때 equipments 생성
+          await tx.equipments.create({
+            data: {
+              characterId: characterId,
+              itemCode: +itemCode,
+            },
+          });
+        } else {
+          // 장착해제하려고 할때 해당 equipments 삭제
+          await tx.equipments.delete({
+            where: { equipmentId: equipment.equipmentId },
+          });
+        }
+
+        // 캐릭터 상태 업데이트
+        const presentCharacter = await tx.characters.update({
+          where: {
             characterId: characterId,
-            itemCode: +itemCode,
+          },
+          data: {
+            health: {
+              increment: equip ? +item.itemStat.health : -item.itemStat.health,
+            },
+            power: {
+              increment: equip ? +item.itemStat.power : -item.itemStat.power,
+            },
           },
         });
-      } else {
-        // 장착해제하려고 할때 해당 equipments 삭제
-        await prisma.equipments.delete({
-          where: { equipmentId: equipment.equipmentId },
-        });
-      }
 
-      // 캐릭터 상태 업데이트
-      const presentCharacter = await prisma.characters.update({
-        where: {
-          characterId: characterId,
-        },
-        data: {
-          health: {
-            increment: equip ? item.itemStat.health : -item.itemStat.health,
-          },
-          power: {
-            increment: equip ? item.itemStat.power : -item.itemStat.power,
-          },
-        },
-      });
-
-      // 인벤토리 업데이트
-      let presentInventory = await prisma.inventories.update({
-        where: { inventoryId: inventory.inventoryId, characterId: characterId },
-        data: {
-          count: {
-            increment: equip ? -1 : +1,
-          },
-        },
-      });
-
-      if (presentInventory.count === 0 && equip) {
-        // 장착 후 인벤토리에 템이 0개라면 인벤토리 삭제
-        await prisma.inventories.delete({
+        // 인벤토리 업데이트
+        let presentInventory = await tx.inventories.update({
           where: { inventoryId: inventory.inventoryId, characterId: characterId },
-        });
-      } else if (presentInventory.count === 1 && !equip) {
-        // 장착 해제 후 인벤토리에 템이 1개라면 인벤토리 생성 <- 나중에 비어있는 인벤토리 번호를 생각해야 할듯
-        await prisma.inventories.create({
           data: {
-            characterId: characterId,
-            itemCode: +itemCode,
-            count: +1,
+            count: {
+              increment: equip ? -1 : +1,
+            },
           },
         });
-      }
 
-      // 현재 캐릭터 인벤토리 정보
-      const inventoryResult = prisma.inventories.findMany({
-        where: { characterId: req.params.characterId },
-        select: {
-          characterId: true,
-          itemCode: true,
-          count: true,
-        },
+        if (presentInventory.count === 0 && equip) {
+          // 장착 후 인벤토리에 템이 0개라면 인벤토리 삭제
+          await tx.inventories.delete({
+            where: { inventoryId: inventory.inventoryId, characterId: characterId },
+          });
+        } else if (presentInventory.count === 1 && !equip) {
+          // 장착 해제 후 인벤토리에 템이 1개라면 인벤토리 생성 <- 나중에 비어있는 인벤토리 번호를 생각해야 할듯
+          await tx.inventories.create({
+            data: {
+              characterId: characterId,
+              itemCode: +itemCode,
+              count: +1,
+            },
+          });
+        }
+
+        // 현재 캐릭터 인벤토리 정보
+        const inventoryResult = tx.inventories.findMany({
+          where: { characterId: req.params.characterId },
+          select: {
+            characterId: true,
+            itemCode: true,
+            count: true,
+          },
+        });
+
+        let msg = {
+          message: `${item.itemName}${equip ? ' equip' : ' unequip'}에 성공하였습니다.`,
+          character: presentCharacter,
+          Inventory: inventoryResult,
+        };
+        return res.status(200).json(msg);
       });
-
-      let msg = {
-        message: `${item.itemName}${equip ? ' equip' : ' unequip'}에 성공하였습니다.`,
-        character: presentCharacter,
-        Inventory: inventoryResult,
-      };
-      return res.status(200).json(msg);
     } catch (error) {
       next(error);
     }

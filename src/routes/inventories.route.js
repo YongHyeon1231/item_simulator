@@ -5,20 +5,6 @@ import characterValidatorJoi from '../middlewares/validators/characterValidator.
 
 const router = express.Router();
 
-// model Inventories {
-//     inventoryId String @id @default(uuid()) @map("inventoryId")
-
-//     characterId Int @map("characterId")
-
-//     itemCode Int @map("itemCode")
-//     count Int @default(0) @map("count")
-
-//     characters Characters @relation(fields: [characterId], references: [characterId], onDelete: Cascade)
-//     items Items @relation(fields:[itemCode], references: [itemCode], onUpdate: Cascade)
-
-//     @@map("Inventories")
-//   }
-
 // 인벤토리 아이템 추가 <- 다음에 할 때는 inventory 번호를 지정해서 그 번호 칸이 비워지면 순서대로 들어가게 만들어야겠다.
 router.post(
   '/characters/:characterId/inventories',
