@@ -1,8 +1,7 @@
 # item_simulator
 ##### (개인 과제) 아이템 시뮬레이터
 [AWS 링크](https://yonghyeon.store:3000/) <br/>
-(![image](https://github.com/user-attachments/assets/3388340f-9bf6-419f-ab53-5f77358677bd)
-)
+[Tistory](https://dydgustmdfl1231.tistory.com/49)
 
 ### 과제 목표
 1. Express.js의 기본적인 사용법 및 CRUD 기반의 REST API 설계 방법 숙지
