@@ -19,7 +19,7 @@ API 목록 <br/>
 ![image](https://github.com/user-attachments/assets/0f7f2432-01de-4184-8da1-c5bbda752660)
 
 API 상세 정보 
-(https://www.notion.so/API-90fb99e500e344858dbd0648b0c217bb?pvs=4)
+[https://polished-mirror-f4a.notion.site/API-90fb99e500e344858dbd0648b0c217bb]
 
 ### ERD (aquerytool)
 ERD를 aquerytool로 작성하던 도중 Table이 최대 5개 까지만 무료인 것을 알게 되어 일단 요약본으로 작성 하였습니다.
